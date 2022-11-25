@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 enum Season
 {
@@ -17,6 +18,8 @@ public class SunMovement : MonoBehaviour
 
     public float xRot;
     public float yRot;
+
+    public GameObject timeText;
 
     void Update()
     {
@@ -35,5 +38,11 @@ public class SunMovement : MonoBehaviour
                 break;
         }
         this.transform.Rotate(new Vector3(xRot * Time.deltaTime, -yRot * Time.deltaTime ,0), speed);
+
+        TextMeshProUGUI text = timeText.GetComponent<TextMeshProUGUI>();
+        float angle = 0.0f;
+        Vector3 axis = Vector3.zero;
+        this.transform.rotation.ToAngleAxis(out angle, out axis);
+        text.text = "Sonnenwinkel: " + angle + "�";
     }
 }
