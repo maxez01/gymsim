@@ -663,11 +663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25981f43c2081754e8aa6f7f709a4013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  season: 0
   speed: 0.01
-  xRot: 0.15
-  yRot: 0.05
   timeText: {fileID: 1570571485}
+  day: 1
+  month: 1
 --- !u!1 &1372110024
 GameObject:
   m_ObjectHideFlags: 0
