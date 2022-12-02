@@ -664,9 +664,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.01
-  timeText: {fileID: 1570571485}
+  baseRotation: 0.15
+  solsticeTolerance: 0.1
   day: 1
   month: 1
+  timeText: {fileID: 1570571485}
 --- !u!1 &1372110024
 GameObject:
   m_ObjectHideFlags: 0
