@@ -454,10 +454,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.03
-  far clip plane: 100
+  far clip plane: 288.65
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 18.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -480,15 +480,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029817882}
-  m_LocalRotation: {x: 0.025679816, y: 0.97405887, z: -0.14713863, w: 0.1700006}
-  m_LocalPosition: {x: -3.06, y: 9.4, z: 19.19}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.6, y: 1.9, z: -21.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 526646970}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 17.18, y: 160.2, z: 0}
+  m_Father: {fileID: 1074828236}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1069152189
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,8 +554,40 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1074828235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074828236}
+  m_Layer: 0
+  m_Name: Camera Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1074828236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074828235}
+  m_LocalRotation: {x: 0.09904577, y: 0.89239913, z: -0.23911765, w: 0.3696438}
+  m_LocalPosition: {x: -47.22, y: 46.61, z: 56.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1029817885}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 30, y: 135, z: 0}
 --- !u!1 &1109879230
 GameObject:
   m_ObjectHideFlags: 0
