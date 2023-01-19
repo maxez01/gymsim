@@ -6,13 +6,15 @@ using System;
 
 public class SunMovement : MonoBehaviour
 {
-    public float speed = 0.01f;
+    public float speed = 0.01f; // 0.01
     private float xRot, yRot;
     public float baseRotation = 0.15f;
     public float solsticeTolerance = 0.10f;
     public int day = 1; 
     public int month = 1;
     public GameObject timeText;
+    public float angle = 0.0f;
+    public Vector3 axis;
 
     void Start() {
         if (CheckDayAndMonthValue()) {
@@ -26,13 +28,15 @@ public class SunMovement : MonoBehaviour
 
     void Update()
     {
-        this.transform.Rotate(new Vector3(xRot * Time.deltaTime, -yRot * Time.deltaTime ,0), speed);
-        
-        TextMeshProUGUI text = timeText.GetComponent<TextMeshProUGUI>();
-        float angle = 0.0f;
-        Vector3 axis = Vector3.zero;
-        this.transform.rotation.ToAngleAxis(out angle, out axis);
-        text.text = "Sonnenwinkel: " + angle + "�";
+        transform.Rotate(new Vector3(xRot * Time.deltaTime, -yRot * Time.deltaTime ,0), speed);
+        transform.rotation.ToAngleAxis(out angle, out axis);
+
+        // kleiner Hack um den Slider wieder von vorne anfangen zu lassen
+        if (angle == 360)
+        {
+            angle = 0;
+            transform.rotation = Quaternion.AngleAxis(angle, axis);
+        }
     }
 
     /*
