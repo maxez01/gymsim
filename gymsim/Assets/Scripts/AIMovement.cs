@@ -5,6 +5,7 @@ using UnityEngine;
 public class AIMovement : MonoBehaviour
 {
     public MachineManager machineManager;
+    private bool flag = false;
 
     private npc[] npcs;
     // Start is called before the first frame update
@@ -18,17 +19,19 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool flag = false;
 
-        if(GameObject.Find("npcs/npc").transform.position.x < -10) {
-            GameObject.Find("npcs/npc").transform.position += new Vector3(3, 0, 0) * Time.deltaTime;
-        } else if (flag.Equals(false)) {
-            flag = true;
-            int r = Random.Range(0,16);
-            machineManager.animatedMachines[r].gameObject.SetActive(true);
-            machineManager.unanimatedMachines[r].gameObject.SetActive(false);
-            GameObject.Find("npcs/npc").SetActive(false);
+        if (flag.Equals(false)) {
+            if(GameObject.Find("npcs/npc").transform.position.x < -10) {
+                GameObject.Find("npcs/npc").transform.position += new Vector3(3, 0, 0) * Time.deltaTime;
+            } else {
+                flag = true;
+                int r = Random.Range(0,16);
+                machineManager.animatedMachines[r].gameObject.SetActive(true);
+                machineManager.unanimatedMachines[r].gameObject.SetActive(false);
+                GameObject.Find("npcs/npc").SetActive(false);
+            }
         }
+        
     }
 
     private void initializeNPCS() {
