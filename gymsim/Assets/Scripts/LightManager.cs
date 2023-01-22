@@ -20,5 +20,10 @@ public class LightManager : MonoBehaviour
             lights.Find(light => light.name == "Tresenlicht").gameObject.SetActive(true);
         else
             lights.Find(light => light.name == "Tresenlicht").gameObject.SetActive(false);
+
+        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0))
+            lights.Find(light => light.name == "Sun").intensity = 0;
+        else
+            lights.Find(light => light.name == "Sun").intensity = 1;
     }
 }
