@@ -15,7 +15,7 @@ public class SunMovement : MonoBehaviour
     public float angle = 0.0f;
     public Vector3 axis;
 
-    public void Start() {
+    void Start() {
         transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
         day = DateTime.Now.Day;
         month = DateTime.Now.Month;
@@ -35,6 +35,11 @@ public class SunMovement : MonoBehaviour
             angle = 0;
             transform.rotation = Quaternion.AngleAxis(angle, axis);
         }
+    }
+    public void Reset()
+    {
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
+        SetRot();
     }
 
     /*
