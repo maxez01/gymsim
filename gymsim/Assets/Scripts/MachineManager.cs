@@ -5,24 +5,17 @@ using UnityEngine;
 
 public class MachineManager : MonoBehaviour
 {
-    private Dictionary<int, Machine> unanimatedMachines;
-    private Dictionary<int, Machine> animatedMachines;
-    // Start is called before the first frame update
-    void Start()
-    {
-        initializeGameObjects();
-    }
+    public Machine[] unanimatedMachines;
+    public Machine[] animatedMachines;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public MachineManager() {
+        initializeGameObjects();
     }
 
     private void initializeGameObjects() {
         int k = 0;
-        unanimatedMachines = new Dictionary<int, Machine>();
-        animatedMachines = new Dictionary<int, Machine>();        
+        unanimatedMachines = new Machine[17];
+        animatedMachines = new Machine[17];        
 
         // TODO only hardcoded now, could use better code style
         string[] machineListNames = new string[] {"Laufband", "Butterfly", "Brustpresse", "Rudermaschine_", "Beinpresse", "Kurzhantel"};
@@ -43,23 +36,21 @@ public class MachineManager : MonoBehaviour
 
                 animatedMachine.gameObject.SetActive(false);
                 
-                unanimatedMachines.Add(k, unanimatedMachine);
-                animatedMachines.Add(k, animatedMachine);
+                unanimatedMachines[k] = unanimatedMachine;
+                animatedMachines[k] = animatedMachine;
 
                 k++;
 
                 // enable if neccessary
 
-                // Debug.Log(unanimatedMachines.GetValueOrDefault(k-1).gameObject.name);
-                // Debug.Log(animatedMachines.GetValueOrDefault(k-1).gameObject.name);
+                // Debug.Log(unanimatedMachines[k-1].gameObject.name);
+                // Debug.Log(animatedMachines[k-1].gameObject.name);
             }
         }
     }
 
-    private class Machine
+    public class Machine
     {
-        public string name;
-        public Boolean isUsed;
         public GameObject gameObject;
 
         public void SetGameObject(GameObject value) {
