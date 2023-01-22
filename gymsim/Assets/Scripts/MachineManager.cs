@@ -34,7 +34,8 @@ public class MachineManager : MonoBehaviour
                     animatedMachine.SetGameObject(GameObject.Find("Geräte/" + machineListNames[i] + " - animated"));
                 }
 
-                animatedMachine.gameObject.SetActive(false);
+                if(!!animatedMachine.gameObject)
+                    animatedMachine.gameObject.SetActive(false);
                 
                 unanimatedMachines[k] = unanimatedMachine;
                 animatedMachines[k] = animatedMachine;

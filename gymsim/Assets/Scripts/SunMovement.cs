@@ -10,24 +10,22 @@ public class SunMovement : MonoBehaviour
     private float xRot, yRot;
     public float baseRotation = 0.15f;
     public float solsticeTolerance = 0.10f;
-    public int day = 1; 
-    public int month = 1;
-    public GameObject timeText;
+    public int day;
+    public int month;
     public float angle = 0.0f;
     public Vector3 axis;
 
     void Start() {
-        if (CheckDayAndMonthValue()) {
-            xRot = baseRotation;
-            yRot = CalculateSunRotation();
-        } else {
-            xRot = 0;
-            yRot = 0;
-        }
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
+        day = DateTime.Now.Day;
+        month = DateTime.Now.Month;
+        SetRot();
     }
 
     void Update()
     {
+        SetRot();
+
         transform.Rotate(new Vector3(xRot * Time.deltaTime, -yRot * Time.deltaTime ,0), speed);
         transform.rotation.ToAngleAxis(out angle, out axis);
 
@@ -38,6 +36,11 @@ public class SunMovement : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, axis);
         }
     }
+    public void Reset()
+    {
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
+        SetRot();
+    }
 
     /*
     *   Zur Wintersonnenwende (21.12) muss die Neigung der Sonne am größten sein
@@ -46,7 +49,7 @@ public class SunMovement : MonoBehaviour
     */
     private float CalculateSunRotation() {
         DateTime dt = new DateTime(2022, month, day);
-            
+
         // 01.01 - 21.06
         if (dt.DayOfYear + 10 >= 0 && dt.DayOfYear <= 172) {
             return (baseRotation - solsticeTolerance) + ((172 - dt.DayOfYear) / 172f) * 0.2f;
@@ -84,6 +87,20 @@ public class SunMovement : MonoBehaviour
 
             Debug.Log("Month " + month + " of the year does not have " + day + " days");
             return false;
+        }
+    }
+
+    private void SetRot()
+    {
+        if (CheckDayAndMonthValue())
+        {
+            xRot = baseRotation;
+            yRot = CalculateSunRotation();
+        }
+        else
+        {
+            xRot = 0;
+            yRot = 0;
         }
     }
 }
