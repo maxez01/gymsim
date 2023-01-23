@@ -3914,6 +3914,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 1919cd6ce56b8bc419bbfc28057f5fd0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -3599586389356928326, guid: 08ec7b5bc86d074449555988b42ed7d9, type: 3}
     - target: {fileID: 919132149155446097, guid: 1919cd6ce56b8bc419bbfc28057f5fd0, type: 3}
       propertyPath: m_Name
       value: Tresenfigur
@@ -8159,6 +8163,19 @@ MonoBehaviour:
   - {fileID: 1114206442}
   - {fileID: 168396583}
   - {fileID: 164501727}
+  colors:
+  - {r: 0.03722252, g: 0, b: 0.9063317, a: 0}
+  - {r: 0.03137255, g: 0.8, b: 0, a: 1}
+  - {r: 0.90588236, g: 0.78039217, b: 0, a: 1}
+  - {r: 0.90588236, g: 0, b: 0.4509804, a: 1}
+  - {r: 0.5803922, g: 0, b: 0.9058824, a: 1}
+  - {r: 0, g: 0.5568628, b: 0.9058824, a: 1}
+  - {r: 0, g: 0.9058824, b: 0.58431375, a: 1}
+  - {r: 0.19215688, g: 0.12941177, b: 0.03137255, a: 1}
+  - {r: 0, g: 0.28627452, b: 0.007843138, a: 1}
+  - {r: 0.9058824, g: 0, b: 0.007843138, a: 1}
+  - {r: 0.2784314, g: 0, b: 0.015686275, a: 1}
+  - {r: 0.9058824, g: 0.9058824, b: 0.9058824, a: 1}
 --- !u!1001 &1696391381
 PrefabInstance:
   m_ObjectHideFlags: 0

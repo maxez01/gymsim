@@ -23,8 +23,8 @@ public class MachineManager
 
         for(int i = 0; i < machineListNames.Length; i++) {
             for (int j = 0; j < machineListCount[i]; j++) {
-                Machine unanimatedMachine = new Machine(i);
-                Machine animatedMachine = new Machine(i);
+                Machine unanimatedMachine = new Machine((MachineType)i);
+                Machine animatedMachine = new Machine((MachineType)i);
 
                 if (j > 0) {
                     unanimatedMachine.gameObject = GameObject.Find("Geräte/" + machineListNames[i] + " (" + j + ")");
@@ -51,11 +51,16 @@ public class MachineManager
 
     public class Machine
     {
-        public Machine(int type) {
-            machineType = type;
+        public Machine(MachineType machineType) {
+            this.machineType = machineType;
         }
         public GameObject gameObject { get; set; }
 
-        public int machineType { get; set; }
+        public MachineType machineType { get; set; }
+    }
+
+    public enum MachineType
+    {
+        Laufband, Butterfly, Brustpresse, Rudermaschine_, Beinpresse, Kurzhantel
     }
 }
