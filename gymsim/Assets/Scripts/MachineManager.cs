@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineManager : MonoBehaviour
+public class MachineManager
 {
     public Machine[] unanimatedMachines;
     public Machine[] animatedMachines;
@@ -23,19 +23,18 @@ public class MachineManager : MonoBehaviour
 
         for(int i = 0; i < machineListNames.Length; i++) {
             for (int j = 0; j < machineListCount[i]; j++) {
-                Machine unanimatedMachine = new Machine();
-                Machine animatedMachine = new Machine();
+                Machine unanimatedMachine = new Machine(i);
+                Machine animatedMachine = new Machine(i);
 
                 if (j > 0) {
-                    unanimatedMachine.SetGameObject(GameObject.Find("Geräte/" + machineListNames[i] + " (" + j + ")"));
-                    animatedMachine.SetGameObject(GameObject.Find("Geräte/" + machineListNames[i] + " - animated (" + j + ")"));
+                    unanimatedMachine.gameObject = GameObject.Find("Geräte/" + machineListNames[i] + " (" + j + ")");
+                    animatedMachine.gameObject = GameObject.Find("Geräte/" + machineListNames[i] + " - animated (" + j + ")");
                 } else {
-                    unanimatedMachine.SetGameObject(GameObject.Find("Geräte/" + machineListNames[i]));
-                    animatedMachine.SetGameObject(GameObject.Find("Geräte/" + machineListNames[i] + " - animated"));
+                    unanimatedMachine.gameObject = GameObject.Find("Geräte/" + machineListNames[i]);
+                    animatedMachine.gameObject = GameObject.Find("Geräte/" + machineListNames[i] + " - animated");
                 }
 
-                if(!!animatedMachine.gameObject)
-                    animatedMachine.gameObject.SetActive(false);
+                if(!!animatedMachine.gameObject) animatedMachine.gameObject.SetActive(false);
                 
                 unanimatedMachines[k] = unanimatedMachine;
                 animatedMachines[k] = animatedMachine;
@@ -52,10 +51,11 @@ public class MachineManager : MonoBehaviour
 
     public class Machine
     {
-        public GameObject gameObject;
-
-        public void SetGameObject(GameObject value) {
-            gameObject = value;
+        public Machine(int type) {
+            machineType = type;
         }
+        public GameObject gameObject { get; set; }
+
+        public int machineType { get; set; }
     }
 }
