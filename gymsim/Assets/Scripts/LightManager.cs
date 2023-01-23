@@ -5,25 +5,76 @@ using System;
 
 public class LightManager : MonoBehaviour
 {
-    public List<Light> lights;
+    public Light sun, lamp, spot;
+    bool flicker = false;
+    float flickerMoment;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 15, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 15, 0))
-            lights.Find(light => light.name == "Tresenlicht").gameObject.SetActive(true);
+            lamp.gameObject.SetActive(true);
         else
-            lights.Find(light => light.name == "Tresenlicht").gameObject.SetActive(false);
+            lamp.gameObject.SetActive(false);
 
         if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0))
-            lights.Find(light => light.name == "Sun").intensity = 0;
+            sun.intensity = 0;
         else
-            lights.Find(light => light.name == "Sun").intensity = 1;
+            sun.intensity = 1;
+
+        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(21, 0, 0))
+            spot.intensity = 8;
+        else
+            spot.intensity = 0;
+
+        if (DayTimeManager.currentDateTime.TimeOfDay == new TimeSpan(21, 0, 0))
+        {
+            flicker = true;
+            flickerMoment = Time.time;
+        }
+
+        if(flicker)
+            SetSpotFlicker();
+
+
+    }
+
+    private void SetSpotFlicker()
+    {
+        float secondsPassed = Time.time - flickerMoment;
+        if (secondsPassed < 2.5)
+        {
+            if (secondsPassed <= 1.8)
+            {
+                spot.intensity = 0;
+            }
+
+            if (secondsPassed <= 1.2)
+            {
+                spot.intensity = 12;
+            }
+
+            if (secondsPassed <= 1)
+            {
+                spot.intensity = 0;
+            }
+
+            if (secondsPassed <= 0.5)
+            {
+                spot.intensity = 8;
+            }
+
+            if (secondsPassed >= 2.4)
+            {
+                spot.intensity = 8;
+                flicker = false;
+            }
+        }
     }
 }
