@@ -20,6 +20,7 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Startcall");
         machineManager = new MachineManager();
 
         npcs = new NPC[npcObjects.Length];
@@ -41,28 +42,33 @@ public class AIMovement : MonoBehaviour
         if (countTime) {
             timeCounter += Time.deltaTime;
         }
-        for(int i = 0; i < npcObjects.Length; i++) {
-            if(!moveForward(i) && !npcs[i].isWorkingOut && !npcs[i].isWalkingOut) {
+        for(int i = 0; i < npcs.Length; i++) {
+            if(!moveIn(i) && !npcs[i].isWorkingOut && !npcs[i].isWalkingOut) {
                 int r = Random.Range(0,16);
 
-                npcs[i].machineKey = r;
                 setAnimatedObject(true, r, npcs[i]);
 
                 npcs[i].machineKey = r;
                 npcs[i].machineCount++;
+                npcs[i].gameObject.SetActive(false);
+                npcs[i].isWorkingOut = true;
 
                 countTime = true;
-
-                npcObjects[i].SetActive(false);
-                npcs[i].isWorkingOut = true;
+                //Debug.Log("Lock Figure " + i + " " + npcs[i].isWorkingOut + " " + npcs[i].isWalkingOut); 
             } else if (npcs[i].isWorkingOut || npcs[i].isWalkingOut) {
+                if( i == 0) {
+                    Debug.Log(npcs[i].isWalkingOut + " " + npcs[i].isWorkingOut);
+                }
                 int workoutCount = 0;
 
                 if(timeCounter > timeInterval && npcs[i].machineCount <= maxMachines) {
                     timeCounter = 0f;
 
-                    foreach(GameObject npc in npcObjects) {
-                        if (npc.activeSelf.Equals(false)) workoutCount++; 
+                    foreach(NPC npc in npcs) {
+                        if (npc.gameObject.activeSelf.Equals(false)) {
+                            npc.machineCount++; 
+                            workoutCount++;
+                        } 
                     }
 
                     for (int j = 0; j < workoutCount; j++) {
@@ -73,24 +79,28 @@ public class AIMovement : MonoBehaviour
                         setAnimatedObject(true, rr, npcs[j]);
 
                         npcs[j].machineKey = rr;
-                        npcs[j].machineCount++;
                     }            
                 } else if (npcs[i].isWalkingOut) {
-                    npcObjects[i].transform.position += new Vector3(-6, 0, 0) * Time.deltaTime;
-                    
+                    if(npcs[i].gameObject.transform.position.x > -60 && npcs[i].isWalkingOut) {
+                        npcs[i].gameObject.transform.position += new Vector3(-6, 0, 0) * Time.deltaTime;
+                    } else if (npcs[i].isWalkingOut && npcs[i].gameObject.transform.position.x <= -60) {
+                        npcs[i].gameObject.transform.Rotate(new Vector3(0, 180, 0));
+                        npcs[i].isWalkingOut = false;
+                    }
                 } else if (npcs[i].machineCount > maxMachines) {
-                    setAnimatedObject(false, npcs[i].machineKey, npcs[i]);
-
-                    if (!npcObjects[i].activeSelf) {
-                        npcObjects[i].SetActive(true);
+                    if (!npcs[i].gameObject.activeSelf) {
+                        setAnimatedObject(false, npcs[i].machineKey, npcs[i]);
+                        npcs[i].gameObject.SetActive(true);
                         npcs[i].isWorkingOut = false;
                         npcs[i].isWalkingOut = true;
-                        npcObjects[i].transform.Rotate(new Vector3(0, -180, 0));
+                        npcs[i].gameObject.transform.Rotate(new Vector3(0, -180, 0));
+                        //Debug.Log("Unlock Figure " + i + " " + npcs[i].isWorkingOut + " " + npcs[i].isWalkingOut);
                     }
                 }
             } else {
                 break;
             }
+
         }
     }   
 
@@ -135,11 +145,9 @@ public class AIMovement : MonoBehaviour
         skinnedMeshRenderer.materials[0].color = npc.shirtColor;
     }
 
-    private bool moveForward(int key) {
-        if(npcObjects[key].transform.position.x < -10 && key < npcCountMap1[DayTimeManager.currentDateTime.Hour] && !npcs[key].isWalkingOut) {
-            npcObjects[key].transform.position += new Vector3(6, 0, 0) * Time.deltaTime;
-            return true;
-        } else if (key >= npcCountMap1[DayTimeManager.currentDateTime.Hour]) {
+    private bool moveIn(int key) {
+        if(npcs[key].gameObject.transform.position.x < -10 && key < npcCountMap1[DayTimeManager.currentDateTime.Hour] && !npcs[key].isWalkingOut) {
+            npcs[key].gameObject.transform.position += new Vector3(6, 0, 0) * Time.deltaTime;
             return true;
         } else {
             return false;

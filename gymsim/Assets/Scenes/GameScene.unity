@@ -8152,8 +8152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df92afeec16bddb41af8a4d27b77a1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInterval: 8
-  maxMachines: 5
+  timeInterval: 5
+  maxMachines: 2
   npcObjects:
   - {fileID: 1172379679}
   - {fileID: 1326371611}
