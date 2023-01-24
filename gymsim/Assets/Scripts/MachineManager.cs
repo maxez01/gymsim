@@ -44,11 +44,6 @@ public class MachineManager
                 animatedMachines[k] = animatedMachine;
 
                 k++;
-
-                // enable if neccessary
-
-                // Debug.Log(unanimatedMachines[k-1].gameObject.name);
-                // Debug.Log(animatedMachines[k-1].gameObject.name);
             }
         }
     }

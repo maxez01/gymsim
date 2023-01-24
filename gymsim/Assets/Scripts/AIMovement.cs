@@ -41,6 +41,19 @@ public class AIMovement : MonoBehaviour
     {
         walkAndExercise();
     }
+    
+    public void Reset() {
+        for (int i = 0; i < npcs.Length; i++)
+        {
+            npcs[i] = new NPC(npcObjects[i], colors[i % colors.Length]);            
+            npcs[i].gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+            npcs[i].gameObject.transform.position = new Vector3(-55, npcs[i].gameObject.transform.position.y, npcs[i].gameObject.transform.position.z);
+        }     
+        for (int j = 0; j < machineManager.animatedMachines.Length; j++) 
+        {
+            setAnimatedObject(false, j, null);
+        }   
+    }
 
     private void walkAndExercise()
     {
