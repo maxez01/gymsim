@@ -21,14 +21,13 @@ public class DayTimeManager : MonoBehaviour
         int sunriseHour = 8;
 
         currentHour = (currentHour + sunriseHour) % 24;
-
         currentDateTime = new DateTime(
-            2022,
+            DateTime.Now.Year,
             sunMovement.month,
             sunMovement.day,
             currentHour,
             currentMinute,
             0 /* seconds */
-            );
+        );
     }
 }

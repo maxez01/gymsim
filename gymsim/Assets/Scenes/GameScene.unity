@@ -3988,6 +3988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunMovement: {fileID: 1109879233}
+  dayInput: {fileID: 301017609}
+  monthInput: {fileID: 2081492539}
 --- !u!1001 &761151560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5827,6 +5829,8 @@ MonoBehaviour:
   month: 1
   angle: 0
   axis: {x: 0, y: 0, z: 0}
+  dayInput: {fileID: 301017609}
+  monthInput: {fileID: 2081492539}
 --- !u!1 &1114206442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77070a10d954a674a895e5a21d21c816, type: 3}
@@ -7563,7 +7567,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7592,7 +7596,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -759.3334, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8152,8 +8156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df92afeec16bddb41af8a4d27b77a1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInterval: 5
-  maxMachines: 5
+  timeInterval: 12
+  maxMachines: 6
   npcObjects:
   - {fileID: 1172379679}
   - {fileID: 1326371611}
