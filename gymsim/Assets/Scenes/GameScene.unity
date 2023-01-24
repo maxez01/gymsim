@@ -8153,7 +8153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeInterval: 5
-  maxMachines: 2
+  maxMachines: 5
   npcObjects:
   - {fileID: 1172379679}
   - {fileID: 1326371611}
