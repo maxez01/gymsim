@@ -16,6 +16,7 @@ public class SunMovement : MonoBehaviour
     public Vector3 axis;
     public TMP_InputField dayInput;
     public TMP_InputField monthInput;
+    public Light moon;
 
     void Start() {
         transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
@@ -30,6 +31,7 @@ public class SunMovement : MonoBehaviour
 
         transform.Rotate(new Vector3(xRot * Time.deltaTime, -yRot * Time.deltaTime ,0), speed);
         transform.rotation.ToAngleAxis(out angle, out axis);
+        moon.transform.rotation = Quaternion.AngleAxis(-angle, axis);
 
         // kleiner Hack um den Slider wieder von vorne anfangen zu lassen
         if (angle == 360)

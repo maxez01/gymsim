@@ -5,7 +5,7 @@ using System;
 
 public class LightManager : MonoBehaviour
 {
-    public Light sun, lamp, spot;
+    public Light sun, lamp, spot, moon;
     bool flicker = false;
     float flickerMoment;
 
@@ -23,10 +23,16 @@ public class LightManager : MonoBehaviour
         else
             lamp.gameObject.SetActive(false);
 
-        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0))
+        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0)) 
+        {
+            moon.intensity = 0.1f;
             sun.intensity = 0;
-        else
+        }
+        else 
+        {
+            moon.intensity = 0;
             sun.intensity = 1;
+        }
 
         if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(21, 0, 0))
             spot.intensity = 8;
