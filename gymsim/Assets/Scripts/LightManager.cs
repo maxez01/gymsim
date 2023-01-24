@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
@@ -23,12 +21,12 @@ public class LightManager : MonoBehaviour
         else
             lamp.gameObject.SetActive(false);
 
-        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0)) 
+        if (DayTimeManager.currentDateTime.TimeOfDay < new TimeSpan(8, 0, 0) || DayTimeManager.currentDateTime.TimeOfDay > new TimeSpan(20, 0, 0))
         {
             moon.intensity = 0.1f;
             sun.intensity = 0;
         }
-        else 
+        else
         {
             moon.intensity = 0;
             sun.intensity = 1;
@@ -45,7 +43,7 @@ public class LightManager : MonoBehaviour
             flickerMoment = Time.time;
         }
 
-        if(flicker)
+        if (flicker)
             SetSpotFlicker();
 
 

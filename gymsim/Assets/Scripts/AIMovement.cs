@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +5,14 @@ public class AIMovement : MonoBehaviour
 {
     public MachineManager machineManager;
     public float timeInterval = 8f;
-    public int maxMachines = 5; 
+    public int maxMachines = 5;
     public GameObject[] npcObjects;
     public NPC[] npcs;
     public Color[] colors;
     private float timeCounter;
     private List<int> machineIndices;
 
-    private int[] npcCountMap = new int [24] {
+    private int[] npcCountMap = new int[24] {
         1, 1, 1, 1, 1, 2, 2, 3, 4, 5, 6, 6, 6, 5, 5, 6, 7, 10, 12, 11, 8, 5, 3, 2
     };
 
@@ -43,9 +42,11 @@ public class AIMovement : MonoBehaviour
         walkAndExercise();
     }
 
-    private void walkAndExercise() {
+    private void walkAndExercise()
+    {
         timeCounter += Time.deltaTime;
-        for(int i = 0; i < npcs.Length; i++) {
+        for (int i = 0; i < npcs.Length; i++)
+        {
 
             switch (npcs[i].state)
             {
@@ -65,14 +66,14 @@ public class AIMovement : MonoBehaviour
             }
         }
 
-        if(timeCounter >= timeInterval)
+        if (timeCounter >= timeInterval)
             timeCounter = 0f;
     }
 
     private bool IsRoomInside()
     {
         int count = 0;
-        foreach(NPC npc in npcs)
+        foreach (NPC npc in npcs)
         {
             if (npc.state == NPCState.walkingIn || npc.state == NPCState.workingOut)
                 count++;
@@ -89,8 +90,9 @@ public class AIMovement : MonoBehaviour
         return true;
     }
 
-    private void setAnimatedObject(bool animate, int machineKey, NPC npc) {
-        if(animate)
+    private void setAnimatedObject(bool animate, int machineKey, NPC npc)
+    {
+        if (animate)
             setShirtColorByMachine(machineKey, npc);
         machineManager.animatedMachines[machineKey].gameObject.SetActive(animate);
         machineManager.unanimatedMachines[machineKey].gameObject.SetActive(!animate);
@@ -132,7 +134,8 @@ public class AIMovement : MonoBehaviour
         }
     }
 
-    private int getRandomUnusedMachineKey() {
+    private int getRandomUnusedMachineKey()
+    {
         List<int> usedMachines = new List<int>();
         List<int> unusedMachines = new List<int>();
 
@@ -210,16 +213,18 @@ public class AIMovement : MonoBehaviour
         skinnedMeshRenderer.materials[0].color = npc.shirtColor;
     }
 
-    public class NPC {
+    public class NPC
+    {
 
-        public NPC(GameObject gObject, Color shirtColor) {
+        public NPC(GameObject gObject, Color shirtColor)
+        {
             state = NPCState.waiting;
             gameObject = gObject;
             machineKey = -1;
             machineCount = 0;
             this.shirtColor = shirtColor;
         }
- 
+
         public GameObject gameObject { get; set; }
         public int machineKey { get; set; }
         public int machineCount { get; set; }
