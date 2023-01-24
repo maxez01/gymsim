@@ -5,30 +5,20 @@ using UnityEngine;
 public class DayMonthHandler : MonoBehaviour
 {
     public SunMovement sunMovement;
+    public TMP_InputField dayInput;
+    public TMP_InputField monthInput;
 
     // Start is called before the first frame update
     void Start()
     {
-        TMP_InputField[] inputs = this.GetComponentsInChildren<TMP_InputField>();
-        foreach (TMP_InputField input in inputs)
-        {
-            if (input.name == "TagInput")
-                input.text = DateTime.Now.Day.ToString();
-            if (input.name == "MonatInput")
-                input.text = DateTime.Now.Month.ToString();
-        }
+        dayInput.text = DateTime.Now.Day.ToString();
+        monthInput.text = DateTime.Now.Month.ToString();
     }
 
     public void Reset()
     {
-        TMP_InputField[] inputs = this.GetComponentsInChildren<TMP_InputField>();
-        foreach (TMP_InputField input in inputs)
-        {
-            if (input.name == "TagInput")
-                input.text = sunMovement.day.ToString();
-            if (input.name == "MonatInput")
-                input.text = sunMovement.month.ToString();
-        }
+        dayInput.text = sunMovement.day.ToString();
+        monthInput.text = sunMovement.month.ToString();
     }
 
     public void HandleDayUpdate(string text)

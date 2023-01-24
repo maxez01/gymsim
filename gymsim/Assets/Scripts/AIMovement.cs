@@ -20,7 +20,6 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Startcall");
         machineManager = new MachineManager();
 
         npcs = new NPC[npcObjects.Length];
@@ -105,10 +104,11 @@ public class AIMovement : MonoBehaviour
         }
         else
         {
-            int r = Random.Range(0, 16);
-            setAnimatedObject(true, r, npc);
+            int unusedMachineKey = getRandomUnusedMachineKey();
 
-            npc.machineKey = r;
+            setAnimatedObject(true, unusedMachineKey, npc);
+
+            npc.machineKey = unusedMachineKey;
             npc.machineCount++;
             npc.gameObject.SetActive(false);
             npc.state = NPCState.workingOut;
@@ -120,6 +120,7 @@ public class AIMovement : MonoBehaviour
         if (npc.machineCount > maxMachines)
         {
             setAnimatedObject(false, npc.machineKey, npc);
+
             npc.gameObject.SetActive(true);
             npc.state = NPCState.walkingOut;
             npc.gameObject.transform.Rotate(new Vector3(0, -180, 0));
@@ -131,8 +132,7 @@ public class AIMovement : MonoBehaviour
         }
     }
 
-    private void switchMachine(NPC npc)
-    {
+    private int getRandomUnusedMachineKey() {
         List<int> usedMachines = new List<int>();
         List<int> unusedMachines = new List<int>();
 
@@ -147,17 +147,23 @@ public class AIMovement : MonoBehaviour
                 unusedMachines.Add(i);
         }
 
-        int r = Random.Range(0, unusedMachines.Count);
+        return unusedMachines[Random.Range(0, unusedMachines.Count)];
+    }
+
+    private void switchMachine(NPC npc)
+    {
+        int unusedMachineKey = getRandomUnusedMachineKey();
 
         setAnimatedObject(false, npc.machineKey, npc);
-        setAnimatedObject(true, unusedMachines[r], npc);
+        setAnimatedObject(true, unusedMachineKey, npc);
+
         npc.machineCount++;
-        npc.machineKey = r;
+        npc.machineKey = unusedMachineKey;
     }
 
     private void moveOut(NPC npc)
     {
-        if (npc.gameObject.transform.position.x > -60)
+        if (npc.gameObject.transform.position.x > -55)
         {
             npc.gameObject.transform.position += new Vector3(-6, 0, 0) * Time.deltaTime;
         }
@@ -167,7 +173,6 @@ public class AIMovement : MonoBehaviour
             npc.state = NPCState.waiting;
             npc.machineKey = -1;
             npc.machineCount = 0;
-            //npc = new NPC(npc.gameObject, npc.shirtColor);
         }
     }
 

@@ -7,6 +7,7 @@ public class DayTimeDisplay : MonoBehaviour
     void Update()
     {
         TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
-        text.SetText(DayTimeManager.currentDateTime.Hour.ToString("00") + ":" + DayTimeManager.currentDateTime.Minute.ToString("00"));
+        text.SetText(DayTimeManager.currentDateTime.Hour.ToString("00") + ":" + DayTimeManager.currentDateTime.Minute.ToString("00") 
+            + ", " + DayTimeManager.currentDateTime.DayOfWeek);
     }
 }

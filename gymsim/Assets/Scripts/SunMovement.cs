@@ -14,6 +14,8 @@ public class SunMovement : MonoBehaviour
     public int month;
     public float angle = 0.0f;
     public Vector3 axis;
+    public TMP_InputField dayInput;
+    public TMP_InputField monthInput;
 
     void Start() {
         transform.rotation = Quaternion.AngleAxis(0, Vector3.zero);
@@ -67,7 +69,7 @@ public class SunMovement : MonoBehaviour
         return baseRotation;
     }
 
-    private bool CheckDayAndMonthValue() {
+    public bool CheckDayAndMonthValue() {
         int[] monthsWith31Days = { 1, 3, 5, 7, 8, 10, 12 };
         int[] monthsWith30Days = { 4, 6, 9, 11 };
         int monthWith28Days = 2;
@@ -84,7 +86,6 @@ public class SunMovement : MonoBehaviour
             Debug.Log("Enter valid day value (1-31)");
             return false;
         } else {
-
             Debug.Log("Month " + month + " of the year does not have " + day + " days");
             return false;
         }
@@ -101,6 +102,11 @@ public class SunMovement : MonoBehaviour
         {
             xRot = 0;
             yRot = 0;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day;
+
+            dayInput.text = DateTime.Now.Day.ToString();
+            monthInput.text = DateTime.Now.Month.ToString();
         }
     }
 }
