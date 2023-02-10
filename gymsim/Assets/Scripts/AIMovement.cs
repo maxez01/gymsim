@@ -7,8 +7,9 @@ public class AIMovement : MonoBehaviour
     public float timeInterval = 8f;
     public int maxMachines = 5;
     public GameObject[] npcObjects;
-    public NPC[] npcs;
+    public List<NPC> npcs;
     public Color[] colors;
+    public bool isInitialized = false;
     private float timeCounter;
     private List<int> machineIndices;
 
@@ -21,10 +22,10 @@ public class AIMovement : MonoBehaviour
     {
         machineManager = new MachineManager();
 
-        npcs = new NPC[npcObjects.Length];
-        for (int i = 0; i < npcs.Length; i++)
+        npcs = new List<NPC>();
+        for (int i = 0; i < npcObjects.Length; i++)
         {
-            npcs[i] = new NPC(npcObjects[i], colors[i % colors.Length]);
+            npcs.Add(new NPC(npcObjects[i], colors[i % colors.Length]));
             // materials[0] ist das Shirt
             npcObjects[i].GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = npcs[i].shirtColor;
         }
@@ -34,6 +35,8 @@ public class AIMovement : MonoBehaviour
         {
             machineIndices.Add(i);
         }
+
+        isInitialized = true;
     }
 
     // Update is called once per frame
@@ -43,12 +46,14 @@ public class AIMovement : MonoBehaviour
     }
     
     public void Reset() {
-        for (int i = 0; i < npcs.Length; i++)
+        npcs.Clear();
+
+        for (int i = 0; i < npcObjects.Length; i++)
         {
-            npcs[i] = new NPC(npcObjects[i], colors[i % colors.Length]);            
-            npcs[i].gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-            npcs[i].gameObject.transform.position = new Vector3(-55, npcs[i].gameObject.transform.position.y, npcs[i].gameObject.transform.position.z);
-        }     
+            npcs.Add(new NPC(npcObjects[i], colors[i % colors.Length]));
+            npcs[i].gameObject.transform.SetPositionAndRotation(new Vector3(-55, npcs[i].gameObject.transform.position.y, npcs[i].gameObject.transform.position.z), Quaternion.Euler(0, 90, 0));
+        }
+
         for (int j = 0; j < machineManager.animatedMachines.Length; j++) 
         {
             setAnimatedObject(false, j, null);
@@ -58,23 +63,23 @@ public class AIMovement : MonoBehaviour
     private void walkAndExercise()
     {
         timeCounter += Time.deltaTime;
-        for (int i = 0; i < npcs.Length; i++)
-        {
 
-            switch (npcs[i].state)
+        foreach (NPC npc in npcs)
+        {
+            switch (npc.state)
             {
                 case NPCState.waiting:
                     if (IsNobodyWalkingIn() && IsRoomInside())
-                        npcs[i].state = NPCState.walkingIn;
+                        npc.state = NPCState.walkingIn;
                     break;
                 case NPCState.walkingIn:
-                    moveIn(npcs[i]);
+                    moveIn(npc);
                     break;
                 case NPCState.workingOut:
-                    workout(npcs[i]);
+                    workout(npc);
                     break;
                 case NPCState.walkingOut:
-                    moveOut(npcs[i]);
+                    moveOut(npc);
                     break;
             }
         }
